@@ -5,6 +5,7 @@
 		<meta charset="UTF-8">
 		<title>括弧笑</title>
 		<link rel="stylesheet" href="style.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1 user-scalable=0">
 		<style type="text/css">
 			html,
 			body {
@@ -22,10 +23,15 @@
 			</div>
 		</div>
 		<script>
+			window.ontouchmove=function(e){
+			    e.preventDefault && e.preventDefault();
+			    e.returnValue=false;
+			    e.stopPropagation && e.stopPropagation();
+			    return false;
+			};
 			document.querySelector('body').addEventListener('touchstart', eyeball);
-			document.querySelector('body').addEventListener('touchmove', function(e) {
+			document.querySelector('body').addEventListener('touchmove', function() {
 				var eye = document.querySelectorAll('.eye');
-				e.preventDefault();
 				eye.forEach(function(eye) {
 					let x = (eye.getBoundingClientRect().left) + (eye.clientWidth / 2);
 					let y = (eye.getBoundingClientRect().top) + (eye.clientHeight / 2);
