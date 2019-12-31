@@ -16,7 +16,9 @@
         </div>
     </div>
     <script>
-            document.querySelector('body').addEventListener('mousemove', eyeball);
+            document.querySelector('body').addEventListener('touchstart', eyeball);
+            document.querySelector('body').addEventListener('touchmove', eyeball);
+            document.querySelector('body').addEventListener('touchend', eyeball);
             function eyeball() {
                 var eye = document.querySelectorAll('.eye');
                 eye.forEach(function (eye) {
