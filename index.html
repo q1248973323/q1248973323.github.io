@@ -1,61 +1,113 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ch">
 
-	<head>
-		<meta charset="UTF-8">
-		<title>括弧笑</title>
-		<link rel="stylesheet" href="style.css">
-		<meta name="viewport" content="width=device-width, initial-scale=.5, maximum-scale=1 user-scalable=0">
-		<style type="text/css">
-			html,
-			body {
-				overflow: hidden;
-				height: 100%;
-			}
-		</style>
-	</head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/vue.js"></script>
+</head>
 
-	<body>
-		<div class="face">
-			<div class="eyes">
-				<div class="eye"></div>
-				<div class="eye"></div>
-			</div>
-		</div>
-		<script>
-			window.ontouchmove=function(e){
-			    e.preventDefault && e.preventDefault();
-			    e.returnValue=false;
-			    e.stopPropagation && e.stopPropagation();
-			    return false;
-			};
-			document.querySelector('body').addEventListener('touchstart', eyeball);
-			document.querySelector('body').addEventListener('touchmove', function() {
-				var eye = document.querySelectorAll('.eye');
-				eye.forEach(function(eye) {
-					let x = (eye.getBoundingClientRect().left) + (eye.clientWidth / 2);
-					let y = (eye.getBoundingClientRect().top) + (eye.clientHeight / 2);
-					let radian = Math.atan2(event.pageX - x, event.pageY - y);
-					let rot = (radian * (180 / Math.PI) * -1) + 270;
-					eye.style.transform = "rotate(" + rot + "deg)";
+<body>
+    <div id="app">
+        <div class="login-container">
+            <div class="left-container">
+                <div class="title"><span>登陆</span></div>
+                <div class="input-container">
+                    <input type="text" name="username" placeholder="用户名" v-model="username">
+                    <input type="password" name="password" placeholder="密码" v-model="password">
+                </div>
+                <div class="message-container">
+                    <span @click="mima">忘记密码</span>
+                </div>
+                <div class="land-container">
+                    <span @click="land">登陆</span>
+                </div>
+                <div class="ps-container">{{ps}}</div>
+            </div>
+            <div class="right-container">
+                <div class="regist-container">
+                    <span class="regist">注册</span>
+                </div>
+                <div class="actoin-container">
+                    <span @click="register">提交</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                books: [{
+                    username: 'yangkailalala',
+                    password: 'qm09200920'
+                }],
+                username: '',
+                password: '',
+                ps: ''
+            },
+            methods: {
+                land: function () {
+                    var flag = false;
+                    var that = this;
+                    for (var i in this.books) {
+                        if (this.books[i].username == this.username && this.books[i].password == this
+                            .password) {
+                            flag = true;
+                        }
+                    }
+                    if (flag) {
+                        this.ps = '登陆成功,三秒后跳转到主页';
+                    } else {
+                        this.ps = '用户名或密码错误';
+                        setTimeout(function () {
+                            that.ps = ''
+                        }, 3000);
+                    }
+                },
 
+                mima: function () {
+                    alert('用户名:yangkailalala\n密码:qm09200920')
+                },
+                register: function () {
+                    var that = this;
+                    var flag = true
+                    
+                    var user = /^[a-zA-Z]\w{3,15}$/;
+                    if(user.test(this.username)==false){
+                        flag = false;
+                        this.ps = '请输入4到16位（字母，数字，下划线，减号）';
+                    }
+                    if(this.password==''){
+                        flag = false;
+                        this.ps = '密码不能为空'
+                    }
+                    for(var item in this.books){
+                        if(this.books[item].username == this.username){
+                            flag = false;
+                            this.ps = '用户名已重复，请重新输入';
+                        }
+                    }
+                    if (flag) {
+                        this.books.push({
+                            username: this.username,
+                            password: this.password
+                        });
+                        this.username = '';
+                        this.password = '';
+                        this.ps = '注册成功，请重新登陆';
+                        setTimeout(function () {
+                            that.ps = '';
+                        }, 3000)
+                    }
 
-				})
-			});
-			document.querySelector('body').addEventListener('touchend', eyeball);
-
-			function eyeball() {
-				var eye = document.querySelectorAll('.eye');
-				eye.forEach(function(eye) {
-					let x = (eye.getBoundingClientRect().left) + (eye.clientWidth / 2);
-					let y = (eye.getBoundingClientRect().top) + (eye.clientHeight / 2);
-					let radian = Math.atan2(event.pageX - x, event.pageY - y);
-					let rot = (radian * (180 / Math.PI) * -1) + 270;
-					eye.style.transform = "rotate(" + rot + "deg)";
-
-				})
-			}
-		</script>
-	</body>
+                }
+            }
+        })
+    </script>
+</body>
 
 </html>
