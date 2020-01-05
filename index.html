@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=.5">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>啦啦啦</title>
+    <title>Y-kai的登陆页面</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="js/vue.js"></script>
 </head>
@@ -29,10 +29,10 @@
             </div>
             <div class="right-container">
                 <div class="regist-container">
-                    <span class="regist">注册</span>
+                    <span class="regist" >注册</span>
                 </div>
                 <div class="actoin-container">
-                    <span @click="register">提交</span>
+                    <span @click="register" >提交</span>
                 </div>
             </div>
         </div>
@@ -62,7 +62,7 @@
                     if (flag) {
                         this.ps = '登陆成功,三秒后跳转到主页';
                         setTimeout(function(){
-                            window.location.href='http://www.baidu.com';
+                            window.location.href='./home.html';
                         },3000)
                     } else {
                         this.ps = '用户名或密码错误';
