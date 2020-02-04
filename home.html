@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="css/home.css">
 </head>
 <body>
+	<h1>啦啦啦</h1>
     <img src="img/黑白都市.jpg" alt="黑白都市" class="bgi">
     <img src="img/search_logo.png" alt="logo" class="logo">
     <div class="middle">
@@ -64,5 +65,17 @@
 			</p>
 		</div>
 	</div>
+
+	<script src="./js/jquery.js"></script>
+	<script>
+		$.ajax({
+			type:'get',
+			url:'http://localhost:3000/',
+			success:function(a){
+				console.log(a);
+				
+			}
+		})
+	</script>
 </body>
 </html>
